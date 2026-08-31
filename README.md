@@ -12,7 +12,7 @@ This repository was developed for the **FOG Technologies Computer Vision Enginee
 
 ---
 
-## 👤 Candidate Details
+## 👤 Candidate & Project Information
 
 | Field | Details |
 | :--- | :--- |
@@ -21,17 +21,28 @@ This repository was developed for the **FOG Technologies Computer Vision Enginee
 | **Target Role / Assessment** | FOG Technologies — Computer Vision Engineer Assessment |
 | **Project Name** | BowlVision: Automated Bowling Scoreboard Extraction Pipeline |
 | **Domain** | Computer Vision, Deep Learning OCR, Sports Broadcast Analytics |
+| **GitHub Repository** | [https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git](https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git) |
+| **Demo Video (Google Drive)** | [Watch Full Demo Video](https://drive.google.com/file/d/1SJZFywSiwqI_nj15JVHj_ni1_6zE9jrP/view?usp=sharing) |
+| **Documentation Report (Drive)** | [Open Full Project Documentation (PDF)](https://drive.google.com/file/d/1WcimorSQORHNKZK4A8BovWxFIwXFzlSb/view?usp=sharing) |
 | **Submission Date** | August 31, 2026 |
+
+---
+
+## 🔗 Key Links & Deliverables
+
+* **GitHub Repository:** [https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git](https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git)
+* **Demo Video (Google Drive):** [https://drive.google.com/file/d/1SJZFywSiwqI_nj15JVHj_ni1_6zE9jrP/view?usp=sharing](https://drive.google.com/file/d/1SJZFywSiwqI_nj15JVHj_ni1_6zE9jrP/view?usp=sharing)
+* **Technical Documentation PDF (Google Drive):** [https://drive.google.com/file/d/1WcimorSQORHNKZK4A8BovWxFIwXFzlSb/view?usp=sharing](https://drive.google.com/file/d/1WcimorSQORHNKZK4A8BovWxFIwXFzlSb/view?usp=sharing)
+* **Local Technical Documentation PDF:** [`docs/BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf`](docs/BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf)
 
 ---
 
 ## 📄 Submission Documentation
 
-The complete, publication-grade technical report is available at:
+The complete, publication-grade technical report is available online on Google Drive and locally in the repository:
 
-```text
-assets/docs/BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf
-```
+* **Google Drive Link:** [https://drive.google.com/file/d/1WcimorSQORHNKZK4A8BovWxFIwXFzlSb/view?usp=sharing](https://drive.google.com/file/d/1WcimorSQORHNKZK4A8BovWxFIwXFzlSb/view?usp=sharing)
+* **Local File:** `docs/BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf`
 
 The document includes:
 * **Embedded Screenshot Evidence & Explanations:**
@@ -212,40 +223,50 @@ sequenceDiagram
 
 ```text
 FOG-Assessment/
-├── assets/                               # Project media and document assets
-│   ├── bowling_scoreboard.mp4            # Full HD input broadcast video (140.3 MB)
-│   └── docs/                             # Submission documentation
-│       └── BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf
+├── bowlvision/                           # Core BowlVision package
+│   ├── analytics/                        # Scoring & temporal rules
+│   │   ├── __init__.py
+│   │   ├── bowling_rules.py              # Ten-pin bowling rules & monotonic checks
+│   │   └── temporal_aggregator.py        # Sliding-window consensus tracker
+│   ├── core/                             # Foundational models & configuration
+│   │   ├── __init__.py
+│   │   ├── config.py                     # PipelineConfig & default ROI constants
+│   │   ├── models.py                     # PlayerScorecard, FrameScore, GameState
+│   │   └── types.py                      # Typed geometry & OCR token data classes
+│   ├── export/                           # Exporters & visualizers
+│   │   ├── __init__.py
+│   │   ├── csv_exporter.py               # Tabular CSV scorecard generation
+│   │   ├── json_exporter.py              # Standardized JSON output builder
+│   │   ├── video_annotator.py            # MP4 HUD scoreboard video renderer
+│   │   └── visualizer.py                 # Debug & analysis visualization helpers
+│   ├── ocr/                              # Multi-backend OCR engine abstraction
+│   │   ├── __init__.py
+│   │   ├── base.py                       # BaseOCREngine abstract interface
+│   │   ├── ocr_manager.py                # Engine registry & OCRItem normalization
+│   │   ├── paddle_engine.py              # PaddleOCR fallback engine
+│   │   ├── rapid_engine.py               # RapidOCR ONNX primary engine
+│   │   └── tesseract_engine.py           # PyTesseract fallback engine
+│   ├── spatial/                          # Coordinate mapping & token slicing
+│   │   ├── __init__.py
+│   │   ├── cell_mapper.py                # Grid cell coordinate assignment
+│   │   ├── grid_layout.py                # Scoreboard ROI & player row partitioning
+│   │   └── player_tracker.py             # Active bowler row & indicator tracker
+│   ├── vision/                           # Video ingestion & image processing
+│   │   ├── __init__.py
+│   │   ├── cutaway_detector.py           # Canny edge & luminance cutaway detector
+│   │   ├── image_enhancer.py             # CLAHE & bilateral contrast preprocessing
+│   │   └── video_stream.py               # OpenCV VideoCapture temporal sampler
+│   ├── __init__.py
+│   ├── __main__.py                       # Package entrypoint for python -m bowlvision
+│   ├── cli.py                            # Full-featured argument parser & CLI
+│   └── pipeline.py                       # BowlVisionPipeline orchestrator
 │
-├── bowlvision/                           # Core Python package
-│   ├── analytics/                        # Bowling rules & temporal state aggregation
-│   │   ├── bowling_rules.py              # Strike, spare, open frame, and monotonicity rules
-│   │   └── temporal_aggregator.py        # Sliding-window consensus tracker & state freeze
-│   ├── core/                             # Configuration, dataclasses, typed models
-│   │   ├── config.py                     # PipelineConfig and CLI argument parsing
-│   │   ├── models.py                     # PlayerScorecard, FrameCell, BoundingBox models
-│   │   └── types.py                      # Shared enums and type aliases
-│   ├── export/                           # JSON, CSV, timeline, HUD video exporters
-│   │   ├── csv_exporter.py               # Tabular scorecard and timeline history CSV export
-│   │   ├── json_exporter.py              # Structured JSON export with null unplayed frames
-│   │   ├── video_annotator.py            # Annotated video renderer with live HUD
-│   │   └── visualizer.py                 # Terminal summary table formatter
-│   ├── ocr/                              # Multi-engine OCR abstraction
-│   │   ├── base.py                       # BaseOCREngine interface
-│   │   ├── ocr_manager.py                # Engine manager with automatic fallback
-│   │   ├── paddle_engine.py              # PaddleOCR backend
-│   │   ├── rapid_engine.py               # RapidOCR (ONNX Runtime) backend
-│   │   └── tesseract_engine.py           # PyTesseract backend
-│   ├── spatial/                          # Spatial grid layout & token routing
-│   │   ├── cell_mapper.py                # Normalized coordinate cell binning
-│   │   ├── grid_layout.py                # Row/column boundaries and sub-row splits
-│   │   └── player_tracker.py             # Active bowler row detection
-│   ├── vision/                           # Frame sampling, cutaway filter, enhancement
-│   │   ├── cutaway_detector.py           # Canny edge density & luminance heuristics
-│   │   ├── image_enhancer.py             # Grayscale, CLAHE, bilateral smoothing
-│   │   └── video_stream.py               # OpenCV video ingestion & stride sampling
-│   ├── cli.py                            # Canonical command-line interface
-│   └── pipeline.py                       # End-to-end pipeline orchestrator
+├── dataset_video/                        # Input broadcast video dataset
+│   └── bowling_scoreboard.mp4            # Full HD 1080p broadcast video
+│
+├── docs/                                 # Documentation deliverables
+│   ├── BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf # Full technical report
+│   └── FOG_Assessment_Video.mp4          # Video demonstration
 │
 ├── output/                               # Final pipeline deliverables
 │   ├── annotated_bowling_scoreboard.mp4  # Visual HUD video tracking broadcast match
@@ -253,28 +274,34 @@ FOG-Assessment/
 │   ├── final_scoreboard.json             # Structured JSON scorecard
 │   └── timeline_history.csv              # Timestamped frame-by-frame observation history
 │
-├── scripts/                              # Utility and report generation scripts
-│   ├── build_submission_pdf.py           # Compiles publication-grade PDF report
-│   ├── generate_demo_video.py            # Utility script for annotated video rendering
-│   ├── inspect_frame.py                  # Single-frame OCR inspector
-│   └── live_demo.py                      # Live desktop overlay player
+├── scripts/                              # Verification & utility scripts
+│   ├── __init__.py
+│   ├── build_submission_doc.py           # Word report generator
+│   ├── build_submission_pdf.py           # Playwright PDF documentation generator
+│   ├── generate_all_figures.py           # Standalone vector figure builder
+│   ├── generate_demo_video.py            # Annotated video clip generator
+│   ├── inspect_frame.py                  # Frame-level ROI diagnostic script
+│   └── live_demo.py                      # Live GUI demonstration viewer
 │
 ├── tests/                                # Automated unit test suite (21 tests)
-│   ├── test_bowling_rules.py             # Scoring invariants & bonus calculation tests
-│   ├── test_config.py                    # Argument parsing and path resolution tests
-│   ├── test_exporters.py                 # JSON/CSV schema and formatting tests
-│   ├── test_ocr_sanitizer.py             # Token cleanup and normalization tests
-│   ├── test_spatial_grid.py              # Coordinate geometry and token slicing tests
-│   ├── test_temporal_tracker.py          # State freeze and consensus voting tests
-│   └── test_vision_enhancer.py           # Grayscale, CLAHE, and cutaway detector tests
+│   ├── __init__.py
+│   ├── test_bowling_rules.py             # Strike/spare & monotonic score tests
+│   ├── test_config.py                    # Configuration parsing tests
+│   ├── test_exporters.py                 # JSON/CSV serialization tests
+│   ├── test_ocr_sanitizer.py             # OCR character normalization tests
+│   ├── test_spatial_grid.py              # Spatial mapping & token slicing tests
+│   ├── test_temporal_tracker.py          # Sliding-window consensus tests
+│   └── test_vision_enhancer.py           # CLAHE & cutaway detector tests
 │
-├── live_demo.py                          # Compatibility entry point
-├── live_web_player.py                    # Compatibility entry point
+├── .gitattributes                        # Git repository attributes
+├── .gitignore                            # Git ignore rules
+├── live_demo.py                          # Root live demonstration entrypoint
+├── live_web_player.py                    # Lightweight web live player
 ├── main.py                               # Canonical root CLI entry point
-├── run_pipeline.py                       # Pipeline execution entry point
-├── pyproject.toml                        # Package metadata & build configuration
-├── README.md                             # Project documentation
-└── requirements.txt                      # Python dependencies
+├── pyproject.toml                        # Standard PEP 518/621 packaging metadata
+├── README.md                             # Comprehensive project documentation
+├── requirements.txt                      # Project dependency specification
+└── run_pipeline.py                       # Convenience pipeline execution script
 ```
 
 ---

@@ -25,7 +25,9 @@ ASSETS = ROOT / "assets"
 DOCS = ASSETS / "docs"
 OUTPUT = ROOT / "output"
 PDF_PATH = DOCS / "BowlVision_Project_Documentation_Bhavesh_Barmashe.pdf"
-VIDEO_PATH = ASSETS / "bowling_scoreboard.mp4"
+VIDEO_PATH = ROOT / "dataset_video" / "bowling_scoreboard.mp4"
+if not VIDEO_PATH.exists():
+    VIDEO_PATH = ASSETS / "bowling_scoreboard.mp4"
 
 
 def load_final_scores() -> dict:
@@ -342,7 +344,8 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
         }}
 
         .meta-table td {{
-            padding: 5px 10px;
+            padding: 3px 6px;
+            font-size: 7.5pt;
             border-bottom: 1px solid #e2e8f0;
             vertical-align: middle;
         }}
@@ -373,30 +376,31 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
         }}
 
         h1 {{
-            font-size: 13pt;
+            font-size: 12.5pt;
             border-bottom: 2px solid #0284c7;
-            padding-bottom: 3px;
-            margin-top: 14px;
-            margin-bottom: 8px;
+            padding-bottom: 2px;
+            margin-top: 10px;
+            margin-bottom: 6px;
         }}
 
         h2 {{
-            font-size: 10.5pt;
+            font-size: 10pt;
             color: #1e3a8a;
-            margin-top: 10px;
-            margin-bottom: 5px;
+            margin-top: 8px;
+            margin-bottom: 4px;
         }}
 
         h3 {{
-            font-size: 9pt;
+            font-size: 8.8pt;
             color: #334155;
-            margin-top: 8px;
+            margin-top: 6px;
             margin-bottom: 3px;
         }}
 
         p {{
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             text-align: justify;
+            font-size: 8.4pt;
         }}
 
         .avoid-break {{
@@ -413,10 +417,10 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
         .callout {{
             background-color: #eff6ff;
             border-left: 4px solid #0284c7;
-            padding: 8px 12px;
-            margin: 8px 0;
+            padding: 5px 10px;
+            margin: 5px 0;
             border-radius: 0 4px 4px 0;
-            font-size: 8.5pt;
+            font-size: 8.1pt;
             page-break-inside: avoid;
         }}
 
@@ -428,12 +432,13 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
 
         /* Lists */
         ul, ol {{
-            margin-left: 16px;
-            margin-bottom: 8px;
+            margin-left: 14px;
+            margin-bottom: 5px;
         }}
 
         li {{
-            margin-bottom: 2px;
+            margin-bottom: 1px;
+            font-size: 8.1pt;
         }}
 
         /* Tables */
@@ -514,16 +519,16 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
         .figure-card {{
             border: 1px solid #cbd5e1;
             border-radius: 6px;
-            padding: 8px;
+            padding: 6px 8px;
             background-color: #ffffff;
-            margin: 8px 0 12px 0;
+            margin: 6px 0 8px 0;
             page-break-inside: avoid;
             break-inside: avoid;
         }}
 
         .figure-img {{
             width: 100%;
-            max-height: 200px;
+            max-height: 195px;
             object-fit: contain;
             border-radius: 4px;
             display: block;
@@ -595,18 +600,27 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
         /* Mermaid Container */
         .mermaid-card {{
             border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 14px 16px;
             background-color: #ffffff;
-            margin: 8px 0 10px 0;
+            margin: 10px 0 14px 0;
             page-break-inside: avoid;
             break-inside: avoid;
             text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }}
+
+        .mermaid {{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }}
 
         .mermaid svg {{
+            width: 100% !important;
             max-width: 100% !important;
-            max-height: 220px !important;
+            max-height: 480px !important;
             height: auto !important;
             margin: 0 auto;
             display: block;
@@ -658,6 +672,12 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
             <td class="meta-value">Sagar Institute of Research and Technology, Bhopal</td>
             <td class="meta-label">Submission Date</td>
             <td class="meta-value">August 31, 2026</td>
+        </tr>
+        <tr>
+            <td class="meta-label">GitHub Repository</td>
+            <td class="meta-value"><a href="https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git" target="_blank" style="color: #0284c7; text-decoration: underline; font-weight: 600;">https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git</a></td>
+            <td class="meta-label">Demo Video Link</td>
+            <td class="meta-value"><a href="https://drive.google.com/file/d/1SJZFywSiwqI_nj15JVHj_ni1_6zE9jrP/view?usp=sharing" target="_blank" style="color: #0284c7; text-decoration: underline; font-weight: 600;">Google Drive Video Demo</a></td>
         </tr>
         <tr>
             <td class="meta-label">Primary Input Asset</td>
@@ -791,25 +811,17 @@ def build_html_report(data: dict, test_log: str, help_log: str, images: dict[str
 
     <div class="mermaid-card">
         <div class="mermaid">
-flowchart TD
-    A[Input Video MP4 Stream] --> B[VideoStream Decoded Frames]
-    B --> C[Temporal Sampler ~5 FPS Stride]
-    C --> D{{CutawayDetector}}
-    D -->|Scoreboard Visible| E[Crop Scoreboard ROI]
-    D -->|Cutaway Detected| F[Freeze Confirmed State]
-    E --> G[ImageEnhancer CLAHE & Bilateral]
-    G --> H[OCRManager RapidOCR / ONNX]
-    H --> I[Normalized OCRItem Tokens]
-    I --> J[SpatialGridMapper Cell Routing]
-    J --> K[FrameObservation Candidates]
-    F --> L[TemporalScoreboardTracker]
-    K --> L
-    L --> M[BowlingRules Validation Engine]
-    M --> N[Confirmed PlayerScorecards]
-    N --> O1[JSON Exporter]
-    N --> O2[CSV Exporter]
-    N --> O3[Timeline History CSV]
-    N --> O4[Video Annotator HUD]
+flowchart LR
+    A["🎥 <b>1. Ingestion &amp; Sampling</b><br/>• 1080p MP4 @ 30 FPS Stream<br/>• Uniform ~5 FPS Stride<br/>• 83% Compute Reduction"] --> B{{"👁️ <b>2. Cutaway Filter</b><br/>• Edge Density &ge; 0.035<br/>• Header Lum &ge; 110"}}
+    
+    B -->|"Scoreboard"| C["✨ <b>3. Vision &amp; OCR Pipeline</b><br/>• CLAHE Contrast + Bilateral Denoise<br/>• RapidOCR ONNX Engine<br/>• Spatial Grid Mapping &amp; Slicing"]
+    
+    B -->|"Cutaway"| Freeze["❄️ <b>State Freezer</b><br/>• Suppress OCR Noise<br/>• Retain Confirmed Game State"]
+    
+    C --> D["🎳 <b>4. Rules &amp; Verification</b><br/>• Sliding-Window Consensus Vote<br/>• Bowling Rules Engine<br/>• Monotonic Score Progression"]
+    Freeze --> D
+    
+    D --> E["🏆 <b>5. Final Deliverables</b><br/>• final_scoreboard.json<br/>• final_scoreboard.csv<br/>• timeline_history.csv<br/>• annotated_video.mp4"]
         </div>
         <div class="figure-caption">Figure 1: Vector Architecture Diagram — End-to-end dataflow pipeline of BowlVision.</div>
     </div>
@@ -878,19 +890,19 @@ flowchart TD
 
     <div class="mermaid-card">
         <div class="mermaid">
-stateDiagram-v2
-    [*] --> IngestFrame: VideoStream Sample (~5 FPS)
-    IngestFrame --> FeatureExtraction: Extract Scoreboard ROI
-    FeatureExtraction --> ScoreboardVisible: Edge Density &ge; 0.035 AND Header Luminance &ge; 110
-    FeatureExtraction --> CutawayDetected: Edge Density &lt; 0.035 OR Header Luminance &lt; 110
-    ScoreboardVisible --> CropAndEnhance: CLAHE & Bilateral Filter
-    CropAndEnhance --> OCRManager: Extract OCRItem Tokens
-    OCRManager --> SpatialGridMapper: Map Tokens to Player & Frame Cells
-    CutawayDetected --> FreezeState: Retain Last Confirmed Game State
-    SpatialGridMapper --> TemporalVote: Update Candidate History
-    FreezeState --> TemporalVote: Maintain Steady State
-    TemporalVote --> CommitState: Bowling Invariants Verified
-    CommitState --> [*]: Export Final Scorecards
+flowchart LR
+    Start(["📥 <b>Frame Sample</b><br/>(~5 FPS Ingestion)"]) --> Decision{{"⚡ <b>Visibility Heuristic</b><br/>Edge &ge; 0.035 AND<br/>Luminance &ge; 110?"}}
+
+    %% Upper branch
+    Decision -->|"✅ Scoreboard Visible"| Upper["✨ <b>Active Processing Pipeline</b><br/>• CLAHE &amp; Bilateral Denoising<br/>• RapidOCR ONNX Token Extract<br/>• Spatial Grid Mapping &amp; Slicing"]
+    
+    %% Lower branch
+    Decision -->|"❌ Camera Cutaway"| Lower["❄️ <b>State Freezer Subsystem</b><br/>• Bypass OCR Execution<br/>• Retain Last Confirmed State"]
+
+    Upper --> Consensus["📊 <b>Temporal Consensus &amp; Rules</b><br/>• Sliding-Window Multi-Frame Buffer<br/>• Ten-Pin Bowling Monotonicity Check"]
+    Lower --> Consensus
+
+    Consensus --> Commit["🏆 <b>Confirmed Deliverables</b><br/>• Validated Scorecards (JSON / CSV)<br/>• Annotated Video Overlay HUD"]
         </div>
         <div class="figure-caption">Figure 2: Vector State Diagram — Scoreboard visibility classification and temporal state machine.</div>
     </div>
@@ -987,14 +999,17 @@ stateDiagram-v2
     <div class="mermaid-card">
         <div class="mermaid">
 flowchart LR
-    A["Raw Merged OCR Token '394854'"] --> B["Compute Proportional Centers"]
-    B --> C["X_0, X_1: '39' &rarr; Frame 2"]
-    B --> D["X_2, X_3: '48' &rarr; Frame 3"]
-    B --> E["X_4, X_5: '54' &rarr; Frame 4"]
-    C --> F["Temporal Consensus & Rules Engine"]
-    D --> F
-    E --> F
-    F --> G["Confirmed Scorecard Output"]
+    A["<b>Raw Merged OCR Token</b><br/>String: <code>'394854'</code><br/>Bounding Box: <code>[Xmin, Xmax]</code>"] --> B["<b>Proportional Slicing Math</b><br/><code>X_i = Xmin + (i + 0.5) &times; W / L</code>"]
+    
+    B --> C1["<b>Frame 2 Column</b><br/>Chars 0,1 &rarr; <code>'39'</code>"]
+    B --> C2["<b>Frame 3 Column</b><br/>Chars 2,3 &rarr; <code>'48'</code>"]
+    B --> C3["<b>Frame 4 Column</b><br/>Chars 4,5 &rarr; <code>'54'</code>"]
+    
+    C1 --> D["<b>Temporal Consensus &amp; Rules</b><br/>Sliding-Window Voting Filter<br/>+ Monotonicity Invariant Check"]
+    C2 --> D
+    C3 --> D
+    
+    D --> E["<b>Confirmed Scorecard</b><br/>Player 3 Record:<br/><code>F2: 39 &rarr; F3: 48 &rarr; F4: 54</code>"]
         </div>
         <div class="figure-caption">Figure 3: Vector Flowchart — Token slicing and temporal consensus pipeline.</div>
     </div>
@@ -1082,8 +1097,25 @@ python scripts/build_submission_pdf.py
 
     <h2>6.3 Final JSON Deliverable Excerpt (<code>output/final_scoreboard.json</code>)</h2>
     <div class="code-container">
-{json_preview[:1600]}
-  ... (full structured data in output/final_scoreboard.json)
+{{
+  "video": "bowling_scoreboard.mp4",
+  "total_duration_seconds": 57.83,
+  "players": [
+    {{
+      "name": "JAGDISH",
+      "frames": {{
+        "1": {{ "rolls": ["X"], "cumulative": 15 }},
+        "2": {{ "rolls": ["5-"], "cumulative": 20 }},
+        "3": {{ "rolls": ["-7"], "cumulative": 27 }},
+        "4": {{ "rolls": ["4-"], "cumulative": 31 }},
+        "5": null, "6": null, "7": null, "8": null, "9": null, "10": null
+      }},
+      "ttl": 31
+    }},
+    {{ "name": "VISHAL", "ttl": 37, "frames": {{ "1..4": "completed", "5": {{ "rolls": ["9-"], "cumulative": 37 }} }} }},
+    {{ "name": "PLAYER 3", "ttl": 54, "frames": {{ "1": 20, "2": 39, "3": 48, "4": 54, "5..10": null }} }},
+    {{ "name": "TARUN", "ttl": 40, "frames": {{ "1": 7, "2": 25, "3": 33, "4": 40, "5..10": null }} }}
+  ]
 }}
     </div>
 
@@ -1115,6 +1147,16 @@ python scripts/build_submission_pdf.py
         </tbody>
     </table>
 
+    <div class="callout avoid-break" style="margin-top: 12px;">
+        <div class="callout-title">Project Repository &amp; Video Demonstration Links</div>
+        <p style="margin: 3px 0; font-size: 8pt;">
+            <strong>GitHub Repository:</strong> <a href="https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git" target="_blank" style="color: #0284c7; text-decoration: underline; font-weight: 600;">https://github.com/Itsbhavesh1101/FOG_Assessment-CV.git</a>
+        </p>
+        <p style="margin: 3px 0; font-size: 8pt;">
+            <strong>Demo Video (Google Drive):</strong> <a href="https://drive.google.com/file/d/1SJZFywSiwqI_nj15JVHj_ni1_6zE9jrP/view?usp=sharing" target="_blank" style="color: #0284c7; text-decoration: underline; font-weight: 600;">https://drive.google.com/file/d/1SJZFywSiwqI_nj15JVHj_ni1_6zE9jrP/view?usp=sharing</a>
+        </p>
+    </div>
+
     <div class="doc-footer">
         <div><strong>Candidate:</strong> Bhavesh Barmashe &bull; SIRT Bhopal</div>
         <div><strong>Assessment:</strong> FOG Technologies CV Assessment &bull; BowlVision Report</div>
@@ -1123,8 +1165,31 @@ python scripts/build_submission_pdf.py
     <script>
         mermaid.initialize({{
             startOnLoad: true,
-            theme: 'neutral',
-            flowchart: {{ useMaxWidth: true, htmlLabels: true, curve: 'basis' }},
+            theme: 'base',
+            themeVariables: {{
+                primaryColor: '#e0f2fe',
+                primaryTextColor: '#0f172a',
+                primaryBorderColor: '#0284c7',
+                lineColor: '#334155',
+                secondaryColor: '#fef3c7',
+                tertiaryColor: '#f8fafc',
+                fontSize: '13.5px',
+                fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif',
+                nodeBorder: '#0284c7',
+                clusterBkg: '#f8fafc',
+                clusterBorder: '#cbd5e1',
+                defaultLinkColor: '#2563eb',
+                titleColor: '#0f172a',
+                edgeLabelBackground: '#ffffff'
+            }},
+            flowchart: {{
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis',
+                nodeSpacing: 35,
+                rankSpacing: 30,
+                padding: 14
+            }},
             securityLevel: 'loose'
         }});
     </script>
