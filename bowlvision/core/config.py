@@ -64,7 +64,11 @@ class PipelineConfig:
 
     def validate(self) -> None:
         if not self.video_path.exists():
-            raise FileNotFoundError(f"Video file not found at '{self.video_path.resolve()}'")
+            fallback = Path("assets") / self.video_path.name
+            if fallback.exists():
+                self.video_path = fallback
+            else:
+                raise FileNotFoundError(f"Video file not found at '{self.video_path.resolve()}'")
         if self.sample_fps <= 0:
             raise ValueError(f"sample_fps must be positive, got {self.sample_fps}")
         if len(self.roi) != 4:

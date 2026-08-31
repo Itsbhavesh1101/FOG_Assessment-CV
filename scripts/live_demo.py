@@ -13,7 +13,7 @@ def main() -> int:
     return run_cli(
         [
             "--video",
-            "bowling_scoreboard.mp4",
+            "assets/bowling_scoreboard.mp4",
             "--output-dir",
             "output",
             "--sample-fps",
