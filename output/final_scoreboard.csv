@@ -1,0 +1,41 @@
+player,frame,rolls,cumulative,ttl
+JAGDISH,1,X,15,31
+JAGDISH,2,5-,20,31
+JAGDISH,3,-7,27,31
+JAGDISH,4,4-,31,31
+JAGDISH,5,unplayed,unplayed,31
+JAGDISH,6,unplayed,unplayed,31
+JAGDISH,7,unplayed,unplayed,31
+JAGDISH,8,unplayed,unplayed,31
+JAGDISH,9,unplayed,unplayed,31
+JAGDISH,10,unplayed,unplayed,31
+VISHAL,1,8-,8,37
+VISHAL,2,3-,11,37
+VISHAL,3,8-,19,37
+VISHAL,4,9-,28,37
+VISHAL,5,9-,37,37
+VISHAL,6,unplayed,unplayed,37
+VISHAL,7,unplayed,unplayed,37
+VISHAL,8,unplayed,unplayed,37
+VISHAL,9,unplayed,unplayed,37
+VISHAL,10,unplayed,unplayed,37
+P (Player 3),1,X,20,54
+P (Player 3),2,4/,39,54
+P (Player 3),3,9-,48,54
+P (Player 3),4,6-,54,54
+P (Player 3),5,unplayed,unplayed,54
+P (Player 3),6,unplayed,unplayed,54
+P (Player 3),7,unplayed,unplayed,54
+P (Player 3),8,unplayed,unplayed,54
+P (Player 3),9,unplayed,unplayed,54
+P (Player 3),10,unplayed,unplayed,54
+TARUN,1,1-/6-,6,40
+TARUN,2,1/,25,40
+TARUN,3,8-,33,40
+TARUN,4,34,40,40
+TARUN,5,unplayed,unplayed,40
+TARUN,6,unplayed,unplayed,40
+TARUN,7,unplayed,unplayed,40
+TARUN,8,unplayed,unplayed,40
+TARUN,9,unplayed,unplayed,40
+TARUN,10,unplayed,unplayed,40

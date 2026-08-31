@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# OCR / model caches
+.paddlex/
+.paddleocr/
+*.onnx
+
+# Runtime outputs
+debug/
+output/*.mp4
+output/*.avi
+
+# Large local media inputs
+*.mp4
+*.avi
+*.mov
+*.mkv
+!assets/**/*.mp4
+!output/annotated_bowling_scoreboard.mp4
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bowlvision"
+version = "2.0.0"
+description = "Computer vision and OCR pipeline for extracting bowling scoreboard data from video."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Computer Vision Engineering Team" }
+]
+dependencies = [
+    "opencv-python>=4.8.0",
+    "numpy>=1.24.0",
+    "Pillow>=9.5.0",
+    "rapidocr-onnxruntime>=1.2.0",
+    "pytesseract>=0.3.10",
+    "onnxruntime>=1.16.0",
+]
+
+[project.scripts]
+bowlvision = "bowlvision.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["bowlvision*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
