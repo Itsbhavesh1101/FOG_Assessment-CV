@@ -31,12 +31,12 @@ output/*.mp4
 output/*.avi
 
 # Large local media inputs
-*.mp4
 *.avi
 *.mov
 *.mkv
-!assets/**/*.mp4
 !output/annotated_bowling_scoreboard.mp4
+!dataset_video/bowling_scoreboard.mp4
+!docs/FOG_Assessment_Video.mp4
 
 # OS / editor noise
 .DS_Store
