@@ -317,20 +317,30 @@ python main.py --video assets/bowling_scoreboard.mp4
 
 ### 2. Run Pipeline with Annotated HUD Video
 ```bash
+# Render and save annotated video to output/annotated_bowling_scoreboard.mp4
 python main.py --video assets/bowling_scoreboard.mp4 --render-video
 ```
 
-### 3. Run Automated Unit Tests
+### 3. Run Pipeline with Live Interactive Desktop Viewer
+```bash
+# Process frames and display the live tracking HUD on screen
+python main.py --video assets/bowling_scoreboard.mp4 --render-video --live
+
+# Or launch via the live demo shortcut
+python live_demo.py
+```
+
+### 4. Run Automated Unit Tests
 ```bash
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
-### 4. Rebuild the Technical Documentation PDF
+### 5. Rebuild the Technical Documentation PDF
 ```bash
 python scripts/build_submission_pdf.py
 ```
 
-### 5. Inspect a Specific Video Timestamp
+### 6. Inspect a Specific Video Timestamp
 ```bash
 python scripts/inspect_frame.py --video assets/bowling_scoreboard.mp4 --time 52.2
 ```
